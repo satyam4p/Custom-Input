@@ -1,7 +1,7 @@
 .input-container {
   border: 1px solid gray;
   border-radius: 4px;
-  width: 250px;
+  width: 20rem;
   height: 2rem;
   position: relative;
 }
@@ -17,8 +17,26 @@
   font-size: 14px;
   background: transparent;
 }
+.input-container input:not([value=""]) {
+  -webkit-text-fill-color: transparent;
+}
 
 .input-container .input-renderer {
+  width: 100%;
+  position: absolute;
+  font-size: 14px;
+  inset: 0;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  white-space: pre;
+  user-select: none;
+  scrollbar-width: none;
+  overflow-x: auto;
+}
+
+.input-container .input-renderer::-webkit-scrollbar {
+  display: none;
 }
 
 .suggestions{
