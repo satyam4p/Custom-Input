@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import withHighlighter from "./HOC/withHighlighter";
+import hasSuggestions from "./HOC/hasSuggestions";
 
 const InputField = ({ value, onChange, highlighterRef, color })=>{
   useEffect(()=>{    
@@ -22,7 +23,8 @@ const InputField = ({ value, onChange, highlighterRef, color })=>{
 }
 
 
-
+/**TODO: Need to implement compose function */
+// export default compose(withHighlighter, hasSuggestions)(InputField);
 export default withHighlighter(InputField);
 
 

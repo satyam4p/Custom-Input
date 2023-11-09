@@ -1,10 +1,4 @@
 import React,{ useRef } from "react";
-import './highlighter.css';
-const suggestions = [
-  "abcde",
-  "test",
-  "test2"
-]
 
 function withHighlighter(WrappedComponent){
   return (props)=>{
@@ -25,16 +19,6 @@ function withHighlighter(WrappedComponent){
             }
           })}
       </div>
-      <ul className="suggestions-container">
-        {suggestions.map((item, index)=>{
-          return(
-            <li className="highlighter-suggestion">
-              {item}
-              <hr/>
-            </li>
-          )
-        })}
-      </ul>
       </>
     )
 
