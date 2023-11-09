@@ -1,0 +1,24 @@
+
+.highlighter{
+  display: block;
+  position: relative;
+
+}
+
+.suggestions-container{
+  position: absolute;
+  top: 100%;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.highlighter-suggestion{
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  border: 0.5px solid gray;
+  padding: 0.5rem;
+  align-items: center;
+}
