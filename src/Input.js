@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import withHighlighter from "./HOC/withHighlighter";
 import hasSuggestions from "./HOC/hasSuggestions";
+import { compose } from "redux";
 
 const InputField = ({ value, onChange, highlighterRef, color })=>{
   useEffect(()=>{    
@@ -17,14 +18,12 @@ const InputField = ({ value, onChange, highlighterRef, color })=>{
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onScroll = {handleHighlighterPos}
-          props = {"asjhdbas"}
         />
   )
 }
 
 
 /**TODO: Need to implement compose function */
-// export default compose(withHighlighter, hasSuggestions)(InputField);
-export default withHighlighter(InputField);
+export default compose(withHighlighter, hasSuggestions)(InputField);
 
 

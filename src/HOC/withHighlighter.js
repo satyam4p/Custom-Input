@@ -7,7 +7,7 @@ function withHighlighter(WrappedComponent){
     const REGEX = /({{.*?}})/g;
     return(
       <>
-      <WrappedComponent {...props} highlighterRef = {ref}/>
+      <WrappedComponent {...props} highlighterRef = {ref} REGEX = {REGEX}/>
       <div ref={ref} className="input-renderer">
           {value.split(REGEX).map((word, index)=>{
             if(word.match(REGEX) !== null){

@@ -1,28 +1,36 @@
 import './highlighter.css';
 
-const suggestions = [
-  "abcde",
-  "test",
-  "test2"
-]
 const hasSuggestions = (WrappedComponent)=>{
-
   return (props)=>{
-    return(
-      <>
-      <WrappedComponent {...props} />
-      <ul className="suggestions-container">
-        {suggestions.map((item, index)=>{
-          return(
-            <li className="highlighter-suggestion">
-              {item}
-              <hr/>
-            </li>
-          )
-        })}
-      </ul>
-      </>
-    )
+    const { hasSuggestion, value, onChange, suggestions, REGEX } = props;
+    const setSuggestion = (event, item) =>{
+      if(value.length > 0){
+        let splitVal = value.split(REGEX);
+        let replaceVal = splitVal[splitVal.length - 2];
+        var regex = /{{(.*?)}}/g;
+        let ans = replaceVal.replace(regex, `{{${item.name}}}`);
+        const finalVal = splitVal.slice(0,splitVal.length - 2).join('') + ans;
+        onChange(finalVal);
+      } 
+    }
+
+    if(hasSuggestion){
+      return(
+        <>
+        <WrappedComponent {...props} />
+        <ul className="suggestions-container">
+          {suggestions.map((item, index)=>{
+            return(
+              <li onClick={e=>setSuggestion(e, item)} key={index} className="highlighter-suggestion">
+                {item.name}
+                <hr/>
+              </li>
+            )
+          })}
+        </ul>
+        </>
+      )
+    }
   }
 }
 
