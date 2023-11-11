@@ -8,7 +8,7 @@ const hasSuggestions = (WrappedComponent)=>{
         let splitVal = value.split(REGEX);
         let replaceVal = splitVal[splitVal.length - 2];
         var regex = /{{(.*?)}}/g;
-        let ans = replaceVal.replace(regex, `{{${item.name}}}`);
+        let ans = replaceVal ? replaceVal.replace(regex, `{{${item.name}}}`) : value;
         const finalVal = splitVal.slice(0,splitVal.length - 2).join('') + ans;
         onChange(finalVal);
       } 
