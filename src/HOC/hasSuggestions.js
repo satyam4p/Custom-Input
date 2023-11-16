@@ -3,26 +3,29 @@ import './highlighter.css';
 
 const hasSuggestions = (WrappedComponent)=>{
   return (props)=>{
-    const { hasSuggestion, value, onChange, suggestions, REGEX, spanRef, wordRef } = props;
+    const { hasSuggestion, value, setValue, suggestions, REGEX, spanRef, wordRef } = props;
     const [suggest, setSuggest] = useState(suggestions);
     const [showSuggest, setShow] = useState(false);
+    const [activeSpanIndex, setActiveSpan] = useState(null);
     useEffect(()=>{
-      console.log("wordRef:: ",wordRef)
+      
     },[value])
 
+    /** TODO find the active span index and change the values appropirately */
     const setSuggestion = (event, item) =>{
       setShow(false);
       if(value.length > 0){
+        if(wordRef && wordRef[activeSpanIndex]){
+          wordRef[activeSpanIndex].innerText = `{{${item.name}}}`;
+        }
         let splitVal = value.split(REGEX);
-        console.log(splitVal)
-        let replaceVal = splitVal[splitVal.length - 2];
-        var regex = /{{(.*?)}}/g;
-        let ans = replaceVal ? replaceVal.replace(regex, `{{${item.name}}}`) : "";
-        const finalVal = splitVal.slice(0,splitVal.length - 2).join('') + ans + splitVal.slice(splitVal.length-1, splitVal.length);
-        onChange(finalVal);
+        console.log("splitVal:: ",splitVal);
+        splitVal[activeSpanIndex] = `{{${item.name}}}`;
+        console.log("splitVal after:: ",splitVal);
+        const finalVal = splitVal.join('');
+        console.log("final value:: ",finalVal);
+        setValue(finalVal);
       }
-
-      
     }
 
     useEffect(()=>{
@@ -54,11 +57,10 @@ const hasSuggestions = (WrappedComponent)=>{
       // }
 
     },[value])
-
     if(hasSuggestion){
       return(
         <>
-        <WrappedComponent {...props} />
+        <WrappedComponent {...props} setActiveSpan = {setActiveSpan} />
         <ul className="suggestions-container">
           { showSuggest && suggest.map((item, index)=>{
             return(

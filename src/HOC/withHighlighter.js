@@ -15,6 +15,7 @@ function withHighlighter(WrappedComponent){
     const spanref = useRef();
     const wordRefs = useRef([]);
     const REGEX = /({{.*?}})/g;
+
     return(
       <>
       <WrappedComponent {...props} highlighterRef = {ref} REGEX = {REGEX} wordRef = {wordRefs.current}/>
